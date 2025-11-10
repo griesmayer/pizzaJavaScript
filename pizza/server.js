@@ -1,7 +1,9 @@
 // server.js
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+app.use(express.json());
 
 const orders = [
   { id:  1, name: "Anna",    pizza: "Paesana" },
@@ -34,6 +36,25 @@ app.get("/orders/:id", (req, res) => {
 
   res.json(order);
 });
+
+app.post("/orders", (req, res) => {
+  const { name, pizza } = req.body;
+
+  if (!name || !pizza) {
+    return res.status(400).json({ error: "Name and pizza is required!" });
+  }
+
+  const newId = orders.length ? orders[orders.length - 1].id + 1 : 1;
+
+  const newOrder = { id: newId, name, pizza };
+
+  orders.push(newOrder);
+
+  res.status(201).json(newOrder);
+});
+
+
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

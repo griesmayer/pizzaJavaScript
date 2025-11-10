@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/1f6cbdf3-4bb1-4a35-9a70-bfe158842e6e/resourceGroups/appsvc_linux_swedencentral/providers/Microsoft.Web/sites/griesmayerPizza",
+    "appService.deploySubpath": "pizza"
+}
