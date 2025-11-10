@@ -1,17 +1,29 @@
 // server.js
+const express = require("express");
+const app = express();
+const port = 3000;
 
-// Import the built-in 'http' module
-const http = require('http');
+const orders = [
+  { id:  1, name: "Anna",    pizza: "Paesana" },
+  { id:  2, name: "Susi",    pizza: "Broccoli" },
+  { id:  3, name: "Fritz",   pizza: "Rucola" },
+  { id:  4, name: "Andrea",  pizza: "Broccoli" },
+  { id:  5, name: "Thomas",  pizza: "Paesana" },
+  { id:  6, name: "Verena",  pizza: "Rucola" },
+  { id:  7, name: "Marion",  pizza: "Broccoli" },
+  { id:  8, name: "Karl",    pizza: "Capricciosa" },
+  { id:  9, name: "Hans",    pizza: "Diavola" },
+  { id: 10, name: "Barbara", pizza: "Capricciosa" }
+];
 
-// Create a simple HTTP server
-const server = http.createServer((req, res) => {
-  // Set the response header
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-   // Send the response text
-  res.end('Hello World\n');
+app.get("/", (req, res) => {
+  res.send("Hello, Thomas, Andrea and World from Express!");
 });
 
-// The server will listen on port 3000
-server.listen(3000, () => {
-  console.log('Server is running at http://localhost:3000');
+app.get("/orders", (req, res) => {
+  res.json(orders);
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
