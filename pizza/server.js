@@ -24,6 +24,17 @@ app.get("/orders", (req, res) => {
   res.json(orders);
 });
 
+app.get("/orders/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const order = orders.find(o => o.id === id)
+
+  if (!order) {
+    return res.status(404).json({ error: "Order not found" });
+  }
+
+  res.json(order);
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
