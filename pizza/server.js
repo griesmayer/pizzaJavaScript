@@ -70,6 +70,20 @@ app.put("/orders/:id", (req, res) => {
   res.json(orders[pos]);
 });
 
+app.patch("/orders/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const { name, pizza } = req.body;
+
+  const order = orders.find(o => o.id === id);
+  if (!order) {
+    return res.status(404).json({ error: "Order not found" });
+  }
+
+  if (name !== undefined) order.name = name;
+  if (pizza !== undefined) order.pizza = pizza;
+
+  res.json(order);
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
